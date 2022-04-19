@@ -1,0 +1,25 @@
+class Zad2
+  def findmm(arr)
+    arr.combination(4).to_a.map {|n| n.inject(:+)}.minmax
+  end
+  def bin(num)
+    c = num.length-1
+    tmp = 0
+    num.split('').each{|n|  tmp+=n.to_i*(2**c); c-=1}
+    return tmp
+  end
+  def words(x)
+    return x.split(' ').group_by(&:itself).transform_values(&:count)
+  end
+  def pangram(x)
+    return ('a'..'z').all? {|n| x.downcase.include? n}
+  end    
+end
+  
+  
+  a = Zad2.new()
+  puts a.findmm([1,2,3,4,5])
+  puts a.bin("1000101")
+  puts a.words("ma ma ma ca ca c")
+  puts a.pangram("The quick brown fox jumps over the lazy dog.")
+  puts a.pangram("abcd")

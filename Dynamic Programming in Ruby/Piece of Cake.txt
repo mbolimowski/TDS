@@ -1,0 +1,36 @@
+module InstanceModule
+  def square
+    return self * self
+  end
+end
+
+module ClassModule
+  def sample(size)
+    if size >= 0
+      return Array.new(size){rand(20)}
+    end
+    raise ArgumentError.new "the number must be positive"
+  end
+end
+
+class Integer
+  include InstanceModule
+  include ClassModule
+  alias :random sample 
+  def factorial
+    if self >= 0
+      return (1..self).inject(:*)
+    end
+    raise RuntimeError.new "cannot count factorial for negative number"
+  end
+end
+
+
+posNum = 2
+negNum = -4
+#puts(negNum.factorial)
+puts(posNum.factorial)
+puts(posNum.square)
+puts(negNum.square)
+puts(posNum.sample(posNum))
+puts(posNum.random(posNum))
